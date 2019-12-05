@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h1>Autenticação</h1>
+
+    <form action="{{ url_for('login') }}" method="POST" novalidate>
+
+    {{ formulario.hidden_tag() }}
+
+        <p>
+            {{ formulario.username.label }} <br>
+            {{ formulario.username(size=30) }}
+            {% for erro in formulario.username.errors %}
+                <span style="color: red">{{ erro }}</span>
+            {% endfor %}
+
+        <p>
+            {{ formulario.password.label }} <br>
+            {{ formulario.password(size=30) }}
+            {% for erro in formulario.password.errors %}
+                <span style="color: red">{{ erro }}</span>
+            {% endfor %}
+        <p>
+            {{ formulario.login() }}
+
+    </form>
+
+{% endblock %}

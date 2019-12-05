@@ -1,0 +1,14 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    container_name: bcd
+    environment:
+      - MYSQL_ROOT_PASSWORD=root1234
+      - MYSQL_DATABASE=lab03
+      - MYSQL_USER=aluno
+      - MYSQL_PASSWORD=1234
+    volumes:
+      - ./db_data:/var/lib/mysql
+    ports:
+      - 33060:3306

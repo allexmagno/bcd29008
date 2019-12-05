@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="w3-container w3-teal content">
+    <h2 class="title_1">Cadastrar nova pessoa</h2>
+
+
+    <form class="form " method="POST" action="{{ url_for('cadastrar_pessoa') }}">
+        <br>
+        <label>Nome: </label>
+        <br>
+        <input type="text" name="nome" placeholder="Nome completo">
+        <br>
+        <label>Telefone </label>
+        <br>
+        <input type="text" name="telefone" placeholder="(xx) xxxx-xxxx">
+        <br>
+        <button type="submit"  class="btn btn-outline-primary">Cadastrar</button>
+    </form>
+    </div>
+
+{% endblock %}

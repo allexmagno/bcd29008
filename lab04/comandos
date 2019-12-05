@@ -1,0 +1,39 @@
+# Acessar o banco remotamente
+mysql --user allex -h ampto.sj.ifsc.edu.br --port 33060 -p
+
+# Une as chaves primárias
+SELECT surname, startdate FROM employee e INNER JOIN jobhistory j ON e.empno = j.empno WHERE position = 'Accountant' AND YEAR(startdate) = 1980;
+
+# Equivalente ao anterior, porém mais direto
+SELECT surname, startdate FROM employee NATURAL JOIN jobhistory WHERE position = 'Accountant' AND YEAR(startdate) = 1980;
+
+# Capturar o mes do tipo DATE
+SELECT surname, forenames, dob FROM employee WHERE MONTH(dob) =3;
+
+# Subconsultas
+SELECT empno, surname, forenames FROM employee WHERE empno IN (SELECT empno FROM empcourse WHERE courseno IS NOT NULL);
+
+ Fazendo uso de subconsulta, liste o número, nome e sobrenome de todos os funcionáriosque nunca fizeram um curso
+SELECT empno, surname, forenames FROM employee WHERE empno NOT IN (SELECT empno FROM empcourse);
+
+Fazendo  uso  de  subconsulta,  liste  os  nomes  das  pessoas  que  fizeram  algum  curso  em 1988
+SELECT surname FROM employee WHERE empno IN (SELECT empno FROM empcourse NATURAL JOIN course WHERE YEAR(cdate) = 1988);
+
+Liste o nome do departamento e o total de funcionários de cada departamento
+SELECT dname, COUNT(empno) AS TOTAL_FUNCIONARIOS FROM employee NATURAL JOIN department GROUP BY dname;
+
+#Exercicio 10
+SELECT dname, cname, COUNT(*) AS TOTAL FROM department d NATURAL JOIN employee e NATURAL JOIN empcourse ep NATURAL JOIN course GROUP BY dname, cname;
+
+# Exercicio 11
+SELECT dname, MAX(salary) AS pleba FROM department NATURAL JOIN employee NATURAL JOIN jobhistory GROUP BY dname;
+
+#Exercicio 13
+UPDATE employee SET depno = (SELECT depno FROM department WHERE dname = "engineering") WHERE depno IN (SELECT depno FROM department WHERE dname = "accounts");
+
+#Exercicio 14
+DELETE FROM employee WHERE depno IN (SELECT depno FROM department WHERE dname = "accounts");
+
+#Exercicio 15
+DELETE course, empcourse, jobhistory, employee FROM employee NATURAL JOIN jobhistory NATURAL join empcourse NATURAL JOIN course WHERE depno = (SELECT depno FROM department WHERE dname = "engineering");
+

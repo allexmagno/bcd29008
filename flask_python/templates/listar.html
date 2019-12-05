@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="content">
+        <h2>Listar</h2>
+
+        <table class="table-active table-1">
+            <thead>
+                <tr style="text-align: center">
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Açoes</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for pessoa in lista_pessoas %}
+                <tr style="text-align: center">
+                    <td> {{ pessoa.idPessoa }} </td>
+                    <td> {{ pessoa.nome }}</td>
+                    <td class="btn btn-danger"> <a href="/excluir?id={{ pessoa.idPessoa }}">excluir</a> </td>
+
+                    <td class="btn btn-outline-success">
+                        <a href="/editar?id={{ pessoa.idPessoa }}">Editar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <br><br>
+    <p><a href="/cadastrar" class="btn btn-outline-info">Cadastrar</a></p>
+    </div>
+
+{% endblock %}

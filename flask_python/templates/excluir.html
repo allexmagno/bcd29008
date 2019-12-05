@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h2 class="title_1">Excluir</h2>
+<p class="">Você realmente desja exluir {{ pessoa.nome }}</p>
+
+    <form class="form" method="POST" action="{{ url_for('excluir') }}">
+
+
+        <input type="hidden" name="idP" value="{{ pessoa.idPessoa }}">
+        <button type="submit"  class="btn btn-outline-danger">Sim</button>
+    </form>
+    <p><a class="btn btn-outline-primary" href="/listar">Não</a></p>
+
+{% endblock %}
